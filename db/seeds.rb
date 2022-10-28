@@ -53,22 +53,35 @@
 
 
 
-puts 'Cleaning database...'
-Movie.destroy_all
-require 'open-uri'
 require 'json'
+require 'open-uri'
 
-# ingredient = 'chocolate'
+puts 'Clearing DB'
+Bookmark.destroy_all
+Movie.destroy_all
+
 url = 'https://tmdb.lewagon.com/movie/top_rated'
+data_serialized = URI.open(url).read
+data = JSON.parse(data_serialized)
 
-movies_file = URI.open(url).read
-movies_hash = JSON.parse(movies_file)['results']
+relevant_infos = data['results']
 
-movies_hash.each do |movie|
-  Movie.create(title: movie['original_title'],
-        overview: movie['overview'],
-        poster_url: movie['poster_path'],
-        rating: movie['vote_average']
+relevant_infos.each do |info|
+  poster_url = "https://image.tmdb.org/t/p/original/#{info['poster_path']}"
+  file = URI.open(poster_url)
+  movie = Movie.new(
+    title: info['original_title'],
+    overview: info['overview'],
+    poster_url: poster_url,
+    rating: info['popularity']
   )
+  movie.photo.attach(
+    io: file,
+    filename: "#{info['original_title'].gsub(' ', '-')}.png",
+    content_type: 'image/png'
+  )
+  movie.save
 end
+
 puts 'Finished!'
+puts "Made #{Movie.count} movies"

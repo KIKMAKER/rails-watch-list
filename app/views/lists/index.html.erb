@@ -5,8 +5,9 @@
     <p><%= link_to "New List", new_list_path, class: "btn btn-flat" %></p>
   </div>
 </div>
-
-
+<%# 
+<%= cl_image_tag("fxtrvt6wedyj3sgqajrj",
+      width: 400, height: 300, crop: :fill) %> %>
 <div class="container mt-4">
   <div class="cards">
     <% @lists.each do |list| %>

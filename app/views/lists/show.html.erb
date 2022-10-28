@@ -4,7 +4,7 @@
   <div class="cards-list">
     <% @list.bookmarks.each do |bookmark| %>
        <div class="card-trip">
-        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+        <%= cl_image_tag bookmark.movie.photo.key, height: 300, width: 400, crop: :fill %>
         <div class="p-3">
           <div class="d-flex justify-content-between mb-2">
             <h2><%= bookmark.movie.title %></h2>
