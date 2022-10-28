@@ -1,0 +1,38 @@
+<h1><%= @list.name %></h1>
+
+<div class="container mt-4">
+  <div class="cards-list">
+    <% @list.bookmarks.each do |bookmark| %>
+       <div class="card-trip">
+        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+        <div class="p-3">
+          <div class="d-flex justify-content-between mb-2">
+            <h2><%= bookmark.movie.title %></h2>
+            <p><%= "🌟" * bookmark.movie.rating %></p>
+          </div>
+          <div>
+            <p><%= bookmark.movie.overview %></p>
+          </div>
+          <div class="card-comment d-flex justify-content-between mt-2">
+          <p>"<%= bookmark.comment %>"</p>
+              <%= link_to bookmark_path(bookmark),
+            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+            <i class="fa-solid fa-trash"></i>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+<br>
+<br>
+<button>
+  <%= link_to "add a movie", new_list_bookmark_path(@list) %>
+</button>
+
+<button>
+  <%= link_to "Back to all lists", lists_path %>
+</button>
