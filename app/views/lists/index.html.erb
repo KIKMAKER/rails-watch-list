@@ -1,13 +1,13 @@
 <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/background.png);">
   <div class="container">
     <h1>My Movie Watchlist</h1>
-    <p>All my favourite movies in all some funky lists</p>
+    <p>All my favourite movies in some funky lists</p>
     <p><%= link_to "New List", new_list_path, class: "btn btn-flat" %></p>
   </div>
 </div>
-<%# 
+<%#
 <%= cl_image_tag("fxtrvt6wedyj3sgqajrj",
-      width: 400, height: 300, crop: :fill) %> %>
+      width: 400, height: 300, crop: :fill) %>
 <div class="container mt-4">
   <div class="cards">
     <% @lists.each do |list| %>

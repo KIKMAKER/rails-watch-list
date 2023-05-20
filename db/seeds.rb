@@ -73,7 +73,7 @@ relevant_infos.each do |info|
     title: info['original_title'],
     overview: info['overview'],
     poster_url: poster_url,
-    rating: info['popularity']
+    rating: info['vote_average']
   )
   movie.photo.attach(
     io: file,
